@@ -21,3 +21,8 @@ TODO for next time:
 - [ ] Label axis
 - [ ] Group data by monthly averages, we might have to go with parsing date first then keep track of on MM-YYYY as we move through the data
 - [ ] Put data transforms & computation into worker
+
+*What did we learn?*
+- Having soundtrack in the background is nice to fill in the gaps when I am just thinking
+- How to make a chart in nivo
+- Limits of the data points you can pass in
