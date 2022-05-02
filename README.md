@@ -17,10 +17,22 @@
 *What we did:* Made line chart with nivo on food cost. Figured out how to pass date into x axis
 
 TODO for next time:
-- [ ] Legend for raw material
-- [ ] Label axis
+- [x] Legend for raw material
+- [x] Label axis
 - [ ] Group data by monthly averages, we might have to go with parsing date first then keep track of on MM-YYYY as we move through the data
 - [ ] Put data transforms & computation into worker
+
+- [ ]  find inflation rate
+- [ ]  graph as line graph
+- [ ]  make icons for soy, wheat, and corn
+- [ ]  load in co2 emission data
+- [ ]  provide total co2 emission to cost chart
+- [ ]  make split flow graph for each product of the raw material
+    - [ ]  make box layout grid chart with teach product breakdown
+    - [ ]  make icons for each co2 contributor
+    - [ ]  add legend
+- [ ]  style graphs and enforce color scheme
+- [ ]  make layer controls
 
 *What did we learn?*
 - Having soundtrack in the background is nice to fill in the gaps when I am just thinking

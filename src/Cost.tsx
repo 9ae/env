@@ -47,21 +47,33 @@ const CostChart: React.FC<{ cost: CostEntryArray[] }> = ({ cost }) => {
         useUTC: false,
         precision: 'day',
       }}
-      // yScale={{
-      //   type: 'linear',
-      //   max: 20
-      // }}
+      yFormat=" >-$.2f"
       margin={{
         bottom: 50,
         left: 50,
-        right: 50,
+        right: 100,
         top: 20
+      }}
+      axisLeft={{
+        legend: "USD / bushell",
+        legendOffset: -30,
+        legendPosition: "middle"
       }}
       axisBottom={{
         format: '%b %d',
+        legend: "over time", // TODO change this to mo / yr depending on user selected fidelity
+        legendOffset: 40,
+        legendPosition: "middle"
       }}
       enableArea={true}
       enablePoints={false}
+      legends={[{
+        direction: 'column',
+        anchor: 'top-right',
+        itemWidth: 60,
+        itemHeight: 20,
+        translateX: 80
+      }]}
     />
   </div>)
 };
