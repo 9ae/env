@@ -1,7 +1,7 @@
 import React from 'react'
 import { Line, ResponsiveLine } from '@nivo/line'
 
-export type CostEntryArray = [string, number, number, number];
+export type CostEntryArray = [Date, number, number, number];
 
 type DataPoint = {
   x: string,
@@ -13,11 +13,36 @@ const CostChart: React.FC<{ cost: CostEntryArray[] }> = ({ cost }) => {
   const soyData: DataPoint[] = [];
   const wheatData: DataPoint[] = [];
 
-  cost.forEach(([date, corn, soy, wheat]: CostEntryArray) => {
-    cornData.push({ x: date, y: corn });
-    soyData.push({ x: date, y: soy });
-    wheatData.push({ x: date, y: wheat });
-  });
+  if (cost.length > 0) {
+    const startDate = cost[0][0];
+    let currentYear = startDate.getUTCFullYear();
+    let entriesPerYear = 0;
+    let runningCornCost = 0;
+    let runningSoyCost = 0;
+    let runningWheatCost = 0;
+    for (const dayEntry of cost) {
+      const [date, corn, soy, wheat] = dayEntry;
+      const year = date.getUTCFullYear();
+      if (year !== currentYear) {
+        const timeUnitString = `${year}`;
+
+        cornData.push({ x: timeUnitString, y: runningCornCost / entriesPerYear });
+        soyData.push({ x: timeUnitString, y: runningSoyCost / entriesPerYear });
+        wheatData.push({ x: timeUnitString, y: runningWheatCost / entriesPerYear });
+
+        entriesPerYear = 0;
+        runningCornCost = 0;
+        runningSoyCost = 0;
+        runningWheatCost = 0;
+      }
+
+      runningCornCost += corn;
+      runningSoyCost += soy;
+      runningWheatCost += wheat;
+      entriesPerYear++;
+      currentYear = year;
+    }
+  }
 
   const data = [
     { id: "corn", data: cornData },
@@ -40,13 +65,13 @@ const CostChart: React.FC<{ cost: CostEntryArray[] }> = ({ cost }) => {
   return (<div style={{ width: "100%", height: "100vh" }}>
     <ResponsiveLine data={data}
       pointLabelYOffset={5}
-      xFormat={`time:${dateFormat}`}
-      xScale={{
-        type: 'time',
-        format: dateFormat,
-        useUTC: false,
-        precision: 'day',
-      }}
+      // xFormat={`time:${dateFormat}`}
+      // xScale={{
+      //   type: 'time',
+      //   format: dateFormat,
+      //   useUTC: false,
+      //   precision: 'day',
+      // }}
       yFormat=" >-$.2f"
       margin={{
         bottom: 50,
@@ -60,7 +85,7 @@ const CostChart: React.FC<{ cost: CostEntryArray[] }> = ({ cost }) => {
         legendPosition: "middle"
       }}
       axisBottom={{
-        format: '%b %d',
+        // format: '%b %d',
         legend: "over time", // TODO change this to mo / yr depending on user selected fidelity
         legendOffset: 40,
         legendPosition: "middle"

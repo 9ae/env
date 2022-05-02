@@ -19,9 +19,9 @@
 TODO for next time:
 - [x] Legend for raw material
 - [x] Label axis
-- [ ] Group data by monthly averages, we might have to go with parsing date first then keep track of on MM-YYYY as we move through the data
+- [x] Group data by yearly averages, we might have to go with parsing date first then keep track of on MM-YYYY as we move through the data
 - [ ] Put data transforms & computation into worker
-
+- [ ] UI controls for adjusting month or year fidelity
 - [ ]  find inflation rate
 - [ ]  graph as line graph
 - [ ]  make icons for soy, wheat, and corn

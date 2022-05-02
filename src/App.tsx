@@ -21,9 +21,9 @@ class App extends React.Component<{}, { cost: CostEntryArray[] }> {
     results.data.shift();
     if (results.errors.length === 0) {
       // TODO instead of taking the last 100 entries, we want to get an average over the months
-      const data = results.data.splice(-100);
+      const data = results.data;
       const cost = data.map(([date, corn, soy, wheat]: [string, string, string, string]) =>
-        ([date, parseFloat(corn), parseFloat(soy), parseFloat(wheat)])
+        ([new Date(date), parseFloat(corn), parseFloat(soy), parseFloat(wheat)])
       );
       this.setState({ cost })
     }
